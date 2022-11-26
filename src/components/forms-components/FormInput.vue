@@ -1,13 +1,11 @@
 <template>
-    <button>
-        {{ order_title }}
-    </button>
+    <input type="text" :placeholder="plchold" name="" id="">
 </template>
 
 <script>
 export default {
     props: {
-        order_title
+        plchold
     }
 }
 </script>
