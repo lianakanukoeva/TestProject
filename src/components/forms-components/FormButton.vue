@@ -1,13 +1,14 @@
 <template>
-    <button>
+    <button class="p-2 text-white rounded-md">
         {{ order_title }}
     </button>
 </template>
 
 <script>
+
 export default {
     props: {
-        order_title
+        order_title: String
     }
 }
 </script>

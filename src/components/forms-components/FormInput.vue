@@ -1,11 +1,17 @@
 <template>
-    <input type="text" :placeholder="plchold" name="" id="">
+    <div class="field">
+        <label for="">{{ label }}</label>
+        <input :type="type" :placeholder="plchold" required :name="name">
+    </div>
 </template>
 
 <script>
 export default {
     props: {
-        plchold
+        label: String,
+        plchold: String,
+        name: String,
+        type: String
     }
 }
 </script>
