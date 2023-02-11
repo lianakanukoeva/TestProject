@@ -1,11 +1,10 @@
 <template>
-  <div class="hello">
-      <FormButton @click="showModal" class="bg-blue-500 hover:bg-blue-400" order_title="Заказать в Москву" />
-      <FormButton class="bg-teal-600 hover:bg-teal-500" order_title="Заказать в Санкт-Петербург" />
+  <div class="hello" v-for="(btn, index) in btn_name" :key="index">
+      <FormButton @click="showModal" :class="btn.btn_class" :order_title="btn.name" />
       <br>
       <br>
-      <Modal ref="modal" />
   </div>
+  <Modal ref="modal" />
 </template>
 
 <script>
@@ -18,6 +17,19 @@ export default {
   components: {
     FormButton,
     Modal
+  },
+  data(){
+    return {
+      btn_name: [{
+          name: "Заказать в Москву", 
+          btn_class: "bg-blue-500 hover:bg-blue-400"
+        },
+        {
+          name: "Заказать в Санкт-Петербург",
+          btn_class: "bg-teal-600 hover:bg-teal-500"
+        }
+      ]
+    }
   },
   methods: {
     showModal: function () {
@@ -41,5 +53,8 @@ li {
 }
 a {
   color: #42b983;
+}
+.hello {
+  display: inline-block;
 }
 </style>

@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-// import Axios from 'axios';
+import axios from 'axios';
 
 export default createStore({
     state: {
@@ -18,22 +18,28 @@ export default createStore({
         ]
     },
     getters: {
-        NAME: state => {
-            return state.cities.name;
+        ID: state => {
+            return state.cities.id;
         },
     },
     mutations: {
-        SET_NAME: (state, payload) => {
-            state.cities.name = payload;
+        GET_NAME_M: (state, id) => {
+            state.cities.id = id;
         }
     },
     actions: {
-        SET_NAME: async(context, name) => {
-            let { data } = await Axios.post('http://hh.autodrive-agency.ru/test-tasks/front/task-7/', { name: name });
-
-            if (data.status == 200) {
-                context.commit('SET_NAME', name);
-            }
+        GET_NAME: async(context) => {
+            return axios('http://hh.autodrive-agency.ru/test-tasks/front/task-7/', {
+                    method: "POST"
+                })
+                .then((id) => {
+                    context.commit('GET_NAME_M', id.data)
+                    return id
+                })
+                .catch((error) => {
+                    console.log(error)
+                    return error
+                })
         },
     },
     modules: {}
