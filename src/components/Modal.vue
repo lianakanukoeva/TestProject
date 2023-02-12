@@ -1,8 +1,8 @@
 <template>
-    <div class="modal__wrapper absolute w100 h100" @click.self="closeModal">
-        <div class="modal-window" v-if="show">
+    <div class="modal__wrapper absolute inset-0 bg-gray-500/75 flex justify-center items-center" v-if="show==true">
+        <div class="modal-window max-w-3xl w-3/5 bg-white rounded-md p-5">
             <Title title="Заказать звонок" />
-            <FormComponent @submit.prevent="closeModal" />
+            <FormComponent @submit.prevent="show==true" />
         </div>
     </div>
 </template>
@@ -18,13 +18,8 @@ export default {
     },
     data: function () {
         return {
-            show: false,
+            show: false
         }
-    },
-    methods: {
-    closeModal: function () {
-        this.show = false
     }
-  }
 }
 </script>

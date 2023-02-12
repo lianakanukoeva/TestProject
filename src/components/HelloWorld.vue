@@ -1,10 +1,8 @@
 <template>
-  <div class="hello" v-for="(btn, index) in btn_name" :key="index">
-      <FormButton @click="showModal" :class="btn.btn_class" :order_title="btn.name" />
-      <br>
-      <br>
+  <div class="p-4 wrapper" v-for="(btn, index) in btn_name" :key="index">
+      <FormButton class="ml-4" @click="showModal" :class="btn.btn_class" :order_title="btn.name" />
   </div>
-  <Modal ref="modal" />
+  <Modal ref="modal" @click.self="closeModal" />
 </template>
 
 <script>
@@ -34,27 +32,16 @@ export default {
   methods: {
     showModal: function () {
         this.$refs.modal.show = true
+    },
+    closeModal: function () {
+        this.$refs.modal.show = false
     }
   }
 }
 </script>
 
 <style lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-.hello {
+.wrapper {
   display: inline-block;
 }
 </style>

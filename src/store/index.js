@@ -18,14 +18,17 @@ export default createStore({
         ]
     },
     getters: {
-        ID: state => {
-            return state.cities.id;
-        },
+        // ID: state => {
+        //     return state.cities.id;
+        // },
     },
     mutations: {
-        GET_NAME_M: (state, id) => {
-            state.cities.id = id;
+        sendFormDatas(state, datas) {
+
         }
+        // GET_NAME_M: (state, id) => {
+        //     state.cities.id = id;
+        // }
     },
     actions: {
         GET_NAME: async(context) => {
