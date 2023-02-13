@@ -1,6 +1,6 @@
 <template>
     <div class="modal__wrapper absolute inset-0 bg-gray-500/75 flex justify-center items-center" v-if="show==true">
-        <div class="modal-window max-w-3xl w-3/5 bg-white rounded-md p-5">
+        <div class="modal-window max-w-3xl w-3/5 bg-white rounded-md p-5 max-xl:w-4/5 max-sm:w-5/6">
             <h2 class="text-gray-900 text-2xl">
                 Заказать звонок
             </h2>

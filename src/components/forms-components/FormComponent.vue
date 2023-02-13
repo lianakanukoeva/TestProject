@@ -1,6 +1,6 @@
 <template>
-  <form @submit.prevent="sendDatas">
-    <div class="grid grid-cols-4 gap-3 mt-5">
+  <form class="max-xl:relative" @submit.prevent="sendDatas">
+    <div class="grid grid-cols-4 gap-3 mt-5 max-xl:grid-cols-3 max-sm:grid-cols-1">
       <div class="input-field w-full" 
         v-for="(item, index) in field" 
         :key="index">
@@ -22,12 +22,12 @@
             class="w-full px-3 py-1.5 rounded-md border-2 border-gray-300"
           />
       </div>
-      <div class="input-field w-full">
+      <div class="input-field w-full max-xl:min-w-[50%]">
         <label class="text-gray-700">Город*</label>
         <br>
         <select
           v-model="selectModel"
-          class="px-2.5 py-1.5 rounded-md border-2 border-gray-300">
+          class="px-2.5 py-1.5 rounded-md border-2 border-gray-300 max-xl:w-full">
           <option
             v-for="(city, index) in this.$store.state.cities"
             :key="index"
@@ -39,7 +39,7 @@
         </select>
       </div>
     </div>
-    <FormButton class="w-40 float-right mt-4 bg-teal-600 hover:bg-teal-500" 
+    <FormButton class="w-40 float-right mt-4 bg-teal-600 hover:bg-teal-500 max-xl:absolute bottom-0 right-0 max-xl:min-w-[32%] max-sm:relative max-sm:min-w-[100%]"
       order_title="Отправить" />
   </form>
 </template>
