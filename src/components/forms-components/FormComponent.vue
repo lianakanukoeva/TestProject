@@ -1,21 +1,23 @@
 <template>
-  <form method="post" @submit.prevent="sendDatas">
+  <form @submit.prevent="sendDatas">
     <div class="grid grid-cols-4 gap-3 mt-5">
       <div class="input-field w-full" 
         v-for="(item, index) in field" 
         :key="index">
         <label class="text-gray-700">{{ item.label }}</label>
-          <input 
-            v-if="item.type=='tel'"
+          <input v-if="item.type=='tel'"
             v-mask="'+7 (###) ###-##-##'" 
-            v-model="inputPhoneModel" 
+            required
+            v-model="item.inputModel" 
             :placeholder="item.plchold" 
             :type="item.type" 
+            :name="item.name"
             class="w-full px-3 py-1.5 rounded-md border-2 border-gray-300" />
           <input v-else
-            :type="item.type"
-            :placeholder="item.plchold"
             required
+            v-model="item.inputModel" 
+            :placeholder="item.plchold"
+            :type="item.type"
             :name="item.name"
             class="w-full px-3 py-1.5 rounded-md border-2 border-gray-300"
           />
@@ -23,11 +25,13 @@
       <div class="input-field w-full">
         <label class="text-gray-700">Город*</label>
         <br>
-        <select class="px-2.5 py-1.5 rounded-md border-2 border-gray-300">
+        <select
+          v-model="selectModel"
+          class="px-2.5 py-1.5 rounded-md border-2 border-gray-300">
           <option
             v-for="(city, index) in this.$store.state.cities"
             :key="index"
-            :value="city.id"
+            :value="city.name"
             :name="city.id"
           >
             {{ city.name }}
@@ -60,33 +64,35 @@ export default {
           plchold: "Иван Иванов",
           name: "name",
           type: "text",
+          inputModel: ""
         },
         {
           label: "Телефон*",
           plchold: "+7 (___) ___-__-__",
           name: "phone",
           type: "tel",
+          inputModel: ""
         },
         {
           label: "Email*",
           plchold: "you@example.com",
           name: "email",
           type: "email",
+          inputModel: ""
         },
       ],
-      inputPhoneModel: '',
+      selectModel: '',
     };
   },
   methods: {
     ...mapActions(["sendFormDatas"]),
     sendDatas() {
-      this.sendFormDatas({
-        field: this.field.name
-      })
+      for (let key in this.field) {
+        this.sendFormDatas(this.field[key].inputModel)
+      }
+      this.sendFormDatas(this.selectModel)
     }
-  },
-  mounted() {
-  },
+  }
 };
 </script>
 

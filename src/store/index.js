@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import axios from 'axios';
 
+const RESULT_ADD = 'RESULT_ADD';
+
 export default createStore({
     state: {
         cities: [{
@@ -15,29 +17,25 @@ export default createStore({
                 id: 3,
                 name: "Казань"
             }
-        ]
+        ],
+        resultForm: []
     },
     getters: {
-        // ID: state => {
-        //     return state.cities.id;
-        // },
+        getResultForm: state => state.resultForm
     },
     mutations: {
-        sendFormDatas(state, datas) {
-
-        }
-        // GET_NAME_M: (state, id) => {
-        //     state.cities.id = id;
-        // }
+        [RESULT_ADD](state, result) {
+            state.resultForm.push(result)
+        },
     },
     actions: {
-        GET_NAME: async(context) => {
-            return axios('http://hh.autodrive-agency.ru/test-tasks/front/task-7/', {
-                    method: "POST"
-                })
-                .then((id) => {
-                    context.commit('GET_NAME_M', id.data)
-                    return id
+        sendFormDatas(context, result) {
+            context.commit('RESULT_ADD', result)
+            console.log(result)
+            return axios.post('http://hh.autodrive-agency.ru/test-tasks/front/task-7/', { result })
+                .then((result) => {
+                    console.log(result)
+                    return result
                 })
                 .catch((error) => {
                     console.log(error)
